@@ -1,11 +1,22 @@
 #include <Wire.h>
 
-void setup() {
-  // put your setup code here, to run once:
+const int address = 10;
 
+int currentDist;
+
+void setup() {
+  Wire.begin(address);
+  Wire.onRequest(handleRequest);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  currentDist = getDist();
+}
 
+getDist() {
+  
+}
+
+void handleRequest() {
+  Wire.write(currentDist);
 }

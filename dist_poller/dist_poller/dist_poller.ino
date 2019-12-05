@@ -1,16 +1,32 @@
 #include <Wire.h>
 #include <Servo.h>
 
+const int rangefinderAddress = 10;
+const int servoPin = 10;
+const int sweetDist = 10;//нужна калибровка
+const int delta = 2;
+
+Servo servo;
+
+int servoMin = 0;
+int servoMax = 90;
+//int servoPosition = 0;
 int currentDist;
 
-const int rangefinderAddress = 10;
+bool servoIncreasing = true;
 
 void setup() {
   Wire.begin();
+  servo.write(servoMin);
+  delay(500);
 }
 
 void loop() {
   updateInput();
+  if (currentDist <= sweetDist + delta)
+    servo.write(servoMax);
+  else
+    servo.write(servoMin);
 }
 
 int readDist()
@@ -22,7 +38,7 @@ int readDist()
 }
 
 void updateInput() {
-  int dist = readKey();
+  int dist = readDist();
   if (dist >= 0) {
     currentDist = dist;
   }

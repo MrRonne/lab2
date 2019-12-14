@@ -9,7 +9,6 @@ const int servoMin = 0;
 const int servoMax = 80;
 
 Servo servo;
-int currentDist;
 
 void setup() {
   Serial.begin(115200);
@@ -20,8 +19,7 @@ void setup() {
 }
 
 void loop() {
-  updateInput();
-  if (currentDist <= sweetDist + delta)
+  if (readDist() <= sweetDist + delta)
     servo.write(servoMax);
   else
     servo.write(servoMin);
@@ -31,14 +29,8 @@ int readDist()
 {
   Wire.requestFrom(rangefinderAddress, 1);
   if (Wire.available()) {
-    return Wire.read();
-  }
-}
-
-void updateInput() {
-  int dist = readDist();
-  Serial.println(dist);
-  if (dist >= 0) {
-    currentDist = dist;
+    int dist = Wire.read();
+    Serial.println(dist);
+    return dist;
   }
 }

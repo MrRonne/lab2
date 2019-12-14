@@ -5,14 +5,11 @@ const int rangefinderAddress = 10;
 const int servoPin = 9;
 const int sweetDist = 8;//нужна калибровка
 const int delta = 5;
+const int servoMin = 0;
+const int servoMax = 80;
 
 Servo servo;
-
-int servoMin = 0;
-int servoMax = 80;
 int currentDist;
-
-bool servoIncreasing = true;
 
 void setup() {
   Serial.begin(115200);

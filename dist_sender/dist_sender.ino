@@ -4,7 +4,7 @@ const int address = 10;
 const int sensorPin = A0;
 const float voltsPerMeasurement = 5.0/1024.0;
 
-int currentDist;
+int dist;
 
 void setup() {
   Serial.begin(115200);
@@ -13,8 +13,8 @@ void setup() {
 }
 
 void loop() {
-  currentDist = (int)getDist();
-  Serial.println(currentDist);
+  dist = (int)getDist();
+  Serial.println(dist);
 }
 
 float getDist(){
@@ -46,5 +46,5 @@ float readAnalog()
 }
 
 void handleRequest() {
-  Wire.write(currentDist);
+  Wire.write(dist);
 }

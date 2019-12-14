@@ -3,10 +3,10 @@
 
 const int rangefinderAddress = 10;
 const int servoPin = 9;
-const int sweetDist = 8;//нужна калибровка
-const int delta = 5;
-const int servoMin = 0;
-const int servoMax = 80;
+const int distToSweet = 8;//нужна калибровка
+const int distDelta = 5;
+const int positionIdle = 0;
+const int positionHit = 80;
 
 Servo servo;
 
@@ -14,15 +14,15 @@ void setup() {
   Serial.begin(115200);
   Wire.begin();
   servo.attach(servoPin);
-  servo.write(servoMin);
+  servo.write(positionIdle);
   delay(500);
 }
 
 void loop() {
-  if (readDist() <= sweetDist + delta)
-    servo.write(servoMax);
+  if (readDist() <= distToSweet + distDelta)
+    servo.write(positionHit);
   else
-    servo.write(servoMin);
+    servo.write(positionIdle);
 }
 
 int readDist()

@@ -19,7 +19,6 @@ void loop() {
 
 float getDist(){
   float volts = readAnalog() * voltsPerMeasurement;
-  // return 65 * pow(volts, -1.10); // for big IR sensor (SHARP 2Y0A02)
   return pow(14.7737/volts, 1.2134); // for small IR sensor (SHARP 2Y0A21)
 }
 
